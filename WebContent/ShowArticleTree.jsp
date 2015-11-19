@@ -20,7 +20,9 @@
 		 while(rs.next()){
 			 str += "<tr><td>" + rs.getInt("id") + "</td><td>" +
 		              preStr + "<a href='ShowArticleDetail.jsp?id="+ rs.getInt("id")+ "'>" +
-			          rs.getString("title") + "</a>" + "</td></tr>";
+			          rs.getString("title") + "</a></td>" +
+			          "<td><a href='Delete.jsp?id=" + rs.getInt("id") + "&pid=" + rs.getInt("pid") + "'>删除</a>" +
+			          "</td></tr>";
 			 if(rs.getInt("isleaf")!= 0){
 				 tree(conn,rs.getInt("id"),level+1);
 			 }
@@ -54,7 +56,9 @@
  while(rs.next()){
 	 str +="<tr><td>" + rs.getInt("id") + "</td><td>" +
            "<a href='ShowArticleDetail.jsp?id="+ rs.getInt("id")+ "'>" +
-	       rs.getString("title") + "</a>" + "</td></tr>";
+	       rs.getString("title") + "</a></td>" +
+           "<td><a href='Delete.jsp?id=" + rs.getInt("id") + "&pid=" + rs.getInt("pid") + "'>删除</a>" +//添加删除功能
+           "</td></tr>";
 	 if(rs.getInt("isleaf") != 0){
 		 tree(conn,rs.getInt("id"),1);
 	 }
@@ -71,6 +75,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="Post.jsp">发表新帖</a>
 <table border="1">
 <%= str %>
 <%str = "";%>
